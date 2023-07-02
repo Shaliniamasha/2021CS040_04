@@ -12,3 +12,4 @@ object InterestCalculator extends App {
   val interest = calculateInterest(deposit)
   println(s"The interest earned on a deposit of Rs. $deposit is Rs. $interest")
 }
+

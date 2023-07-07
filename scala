@@ -14,24 +14,35 @@ object InterestCalculator extends App {
 }
 
 //03
-object StringFormatter extends App {
-  def toUpper(input: String): String = input.toUpperCase
+object StringFormatter {
+  def toUpper(input: String): String = {
+    val firstTwoChars = input.take(2)
+    val remainingChars = input.drop(2)
+    firstTwoChars.toUpperCase() + remainingChars
+  }
 
-  def toLower(input: String): String = input.toLowerCase
+  def toLower(input: String): String = {
+    val firstChar = input.head.toLower
+    val remainingChars = input.tail
+    firstChar + remainingChars.toLowerCase()
+  }
 
-  def formatNames(name: String)(formatFunction: String => String): String = formatFunction(name)
+  def formatNames(name: String)(formatter: String => String): String = {
+    formatter(name)
+  }
 
-  val names = List("Benny", "Niroshan", "Saman", "Kumara")
+  def main(args: Array[String]): Unit = {
+    val names = List("Benny", "Niroshan", "Saman", "Kumara")
 
-  names.foreach { name =>
-    val formattedName = formatNames(name) {
-      case n if n.length % 2 == 0 => toUpper(n)
-      case other => toLower(other) // Use `other` instead of `n` to fix the error
+    names.foreach { name =>
+      val formattedName = formatNames(name) {
+        case s if s.length > 2 && s.charAt(1).isLower => toUpper(s)
+        case s => toLower(s)
+      }
+      println(formattedName)
     }
-    println(formattedName)
   }
 }
-
 //02
 object Tutorial4_Q2 {
   def main(args: Array[String]): Unit = {
